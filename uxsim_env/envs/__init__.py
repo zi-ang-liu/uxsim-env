@@ -1,2 +1,1 @@
-from uxsim_env.envs.grid_world import GridWorldEnv
 from uxsim_env.envs.traffic_sim_four_way import TrafficSimFourWayEnv
