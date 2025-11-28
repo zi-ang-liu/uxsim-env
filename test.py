@@ -33,7 +33,6 @@ env = gym.make("uxsim_env/TrafficSimFourWay-v0")
 #         obs, info = env.reset()
 
 # Example of training a PPO agent
-# tensorboard
 model = PPO("MlpPolicy", env, verbose=1, tensorboard_log="./ppo_uxsim_tensorboard/")
 model.learn(total_timesteps=1000000, callback=AverageDelayCallback())
 model.save("ppo_uxsim_traffic_sim_four_way")
