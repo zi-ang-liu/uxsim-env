@@ -5,7 +5,7 @@ import random
 import gymnasium as gym
 
 
-class TrafficSimFourWayEnv(gym.Env):
+class N12S4Env(gym.Env):
     def __init__(self):
         """
         traffic scenario: 4 signalized intersections as shown below:
