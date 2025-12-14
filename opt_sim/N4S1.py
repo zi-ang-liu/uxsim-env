@@ -1,7 +1,7 @@
 from uxsim import *
 
 
-def evaluate_N3S1(signals):
+def evaluate_N4S1(signals):
 
     # check signals length
     assert len(signals) == 2, "signals should contain two elements."
