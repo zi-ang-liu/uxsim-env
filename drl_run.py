@@ -22,8 +22,8 @@ class AverageDelayCallback(BaseCallback):
         return True
 
 
-# env = gym.make("uxsim_env/N12S4-Env-v0")
-env = gym.make("uxsim_env/N4S1-Env-v0")
+env = gym.make("uxsim_env/N12S4-Env-v0")
+# env = gym.make("uxsim_env/N4S1-Env-v0")
 obs, info = env.reset()
 for _ in range(10):
     action = env.action_space.sample()

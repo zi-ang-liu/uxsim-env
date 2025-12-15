@@ -45,10 +45,12 @@ class N12S4Env(gym.Env):
         """
         super().reset(seed=seed)
 
+        self.tmax = 9000
+
         W = World(
             name="",
             deltan=5,
-            tmax=4000,
+            tmax=self.tmax,
             print_mode=0,
             save_mode=0,
             show_mode=1,
@@ -113,9 +115,9 @@ class N12S4Env(gym.Env):
 
         # random demand definition
         dt = 30
-        demand = 0.22
+        demand = 0.2
         for n1, n2 in itertools.permutations([W1, W2, E1, E2, N1, N2, S1, S2], 2):
-            for t in range(0, 3600, dt):
+            for t in range(0, self.tmax, dt):
                 W.adddemand(n1, n2, t, t + dt, random.uniform(0, demand))
 
         # store UXsim object for later re-use
