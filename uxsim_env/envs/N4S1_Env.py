@@ -38,14 +38,15 @@ class N4S1Env(gym.Env):
         reset the env
         """
         super().reset(seed=seed)
+        tmax = 3600
 
         W = World(
             name="",
             deltan=1,
-            tmax=1200,
+            tmax=tmax,
             print_mode=0,
             save_mode=0,
-            show_mode=1,
+            show_mode=0,
             random_seed=seed,
             duo_update_time=600,
         )
@@ -67,7 +68,7 @@ class N4S1Env(gym.Env):
         # random demand definition
         dt = 30
         demand = 0.22
-        for t in range(0, 3600, dt):
+        for t in range(0, tmax, dt):
             W.adddemand(N1, N3, t, t + dt, random.uniform(0, demand))
             W.adddemand(N2, N3, t, t + dt, random.uniform(0, demand))
 

@@ -53,7 +53,7 @@ class N12S4Env(gym.Env):
             tmax=self.tmax,
             print_mode=0,
             save_mode=0,
-            show_mode=1,
+            show_mode=0,
             random_seed=seed,
             duo_update_time=600,
         )
@@ -115,7 +115,7 @@ class N12S4Env(gym.Env):
 
         # random demand definition
         dt = 30
-        demand = 0.2
+        demand = 0.19
         for n1, n2 in itertools.permutations([W1, W2, E1, E2, N1, N2, S1, S2], 2):
             for t in range(0, self.tmax, dt):
                 W.adddemand(n1, n2, t, t + dt, random.uniform(0, demand))

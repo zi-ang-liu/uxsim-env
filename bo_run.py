@@ -1,46 +1,33 @@
 import optuna
 from opt_sim.get_problem import get_problem
+from plotly.io import show
 
 # test small case
-
-problem = get_problem("N4S1")
+# problem = get_problem("N4S1")
+problem = get_problem("N12S4")
+n_var = problem.n_var
 
 
 def objective(trial):
-    x1 = trial.suggest_float("x1", 10, 70)
-    x2 = trial.suggest_float("x2", 10, 70)
-    x = [x1, x2]
+    x = []
+    for i in range(1, n_var + 1):
+        vars()["x" + str(i)] = trial.suggest_float("x" + str(i), 10, 70)
+        x.append(vars()["x" + str(i)])
     res = problem.evaluate(x)
     return res
 
 
 sampler = optuna.samplers.GPSampler()
 study = optuna.create_study(sampler=sampler)
-study.optimize(objective, n_trials=10)
+study.optimize(objective, n_trials=50)
 
 study.best_params
 
-x_opt = [study.best_params["x1"], study.best_params["x2"]]
+x_opt = [study.best_params["x" + str(i)] for i in range(1, n_var + 1)]
 res_opt = problem.evaluate(x_opt)
+
+
+fig = optuna.visualization.plot_optimization_history(study)
+show(fig)
+
 problem.analyze(x_opt)
-
-
-# def objective(trial):
-#     x1 = trial.suggest_float("x1", 10, 70)
-#     x2 = trial.suggest_float("x2", 10, 70)
-#     x3 = trial.suggest_float("x3", 10, 70)
-#     x4 = trial.suggest_float("x4", 10, 70)
-#     x5 = trial.suggest_float("x5", 10, 70)
-#     x6 = trial.suggest_float("x6", 10, 70)
-#     x7 = trial.suggest_float("x7", 10, 70)
-#     x8 = trial.suggest_float("x8", 10, 70)
-#     x = [x1, x2, x3, x4, x5, x6, x7, x8]
-#     res = evaluate_N12S4(x)
-#     return res
-
-
-# sampler = optuna.samplers.GPSampler()
-# study = optuna.create_study(sampler=sampler)
-# study.optimize(objective, n_trials=10)
-
-# study.best_params

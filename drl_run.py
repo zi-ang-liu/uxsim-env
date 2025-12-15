@@ -37,4 +37,8 @@ for _ in range(10):
 # Example of training a PPO agent
 model = PPO("MlpPolicy", env, verbose=1, tensorboard_log="./ppo_uxsim_tensorboard/")
 model.learn(total_timesteps=1000000, callback=AverageDelayCallback())
-model.save("ppo_uxsim_traffic_sim_four_way")
+model.save("ppo_N12S4")
+
+# test the trained agent
+env = gym.make("uxsim_env/N12S4-Env-v0")
+model = PPO.load("ppo_N12S4")
